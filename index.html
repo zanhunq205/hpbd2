@@ -26,7 +26,6 @@
           <div class="battery">100</div>
         </div>
         <div class="date-area">
-          
           <span class="month"></span>
           <span class="day-name"></span>
           <span class="day"></span>
@@ -41,12 +40,15 @@
           <span class="widget"><i class="bi bi-fuel-pump-fill fuelWidgetIcon"></i></span>
         </div>
 
+        <!-- 👇 CHỈNH Ở ĐÂY: thêm id="messenger" -->
         <div class="notification">
-          <a href="hpbd.html" target="_blank">
-          <div><img class="img" src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" width="14" />
-            <b>Messenger</b></div>
-          <div class="notification-text">1 thông báo</div></a>
+          <a id="messenger" href="hpbd.html" target="_blank">
+            <div><img class="img" src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" width="14" />
+              <b>Messenger</b></div>
+            <div class="notification-text">1 thông báo</div>
+          </a>
         </div>
+
         <div class="flash-and-camera">
         <a href="https://www.youtube.com/c/CodingMaker" target="_blank"><img src="https://raw.githubusercontent.com/zouraiz523/iphone-14-pro-max/main/Phone%2014%20Pro%20Max%20and%20Dynamic%20Island/img-L.png" width="20"/>
            <i class="bi bi-camera-fill"></i></a>
@@ -58,7 +60,7 @@
           <span class="ntf-1"><i class="bi bi-bell-slash-fill"></i> <span>Quiet Mode On</span></span>
           <span class="ntf-2"><i class="bi bi-bell-fill"></i> <span>Quiet Mode Off</span></span>
         </div>
-        
+
         <i class="bi bi-geo-alt-fill"></i>
         <div class="fuel-area">
           <img src="https://raw.githubusercontent.com/zouraiz523/iphone-14-pro-max/main/Phone%2014%20Pro%20Max%20and%20Dynamic%20Island/img-map.jpg" alt="Maps">
@@ -68,20 +70,20 @@
             <span><b>mode of transportationi:</b> Car</span>
           </div>
         </div>
-        
+
         <i class="bi bi-soundwave"></i>
         <div class="music-player">
           <div>
             <img src="https://raw.githubusercontent.com/zouraiz523/iphone-14-pro-max/main/Phone%2014%20Pro%20Max%20and%20Dynamic%20Island/img-M.jpg" alt="Music" class="music-poster">
           </div>
-    
+
           <div class="music-details">
             <p>Loreena Mckennitt Snow</p>
             <p class="c-gray">To Drive the Cold Winter Away</p>
-    
-            <audio id="sarki" loop controls 
-            src="https://www.scriptgenerator.net/generator/really-simple-embed-audio-player-script_files/Loreena_Mckennitt_Snow_56bit.mp3"></audio>
-    
+
+            <!-- 👇 Nhạc nền -->
+            <audio id="sarki" loop controls src="https://www.scriptgenerator.net/generator/really-simple-embed-audio-player-script_files/Loreena_Mckennitt_Snow_56bit.mp3"></audio>
+
             <div class="player">
                 <i class="bi bi-skip-backward-fill"></i>
                 <button id="oynat">
@@ -91,12 +93,22 @@
                 <i class="bi bi-skip-forward-fill"></i>
                 <i class="bi bi-cast"></i>
             </div>
-            <!-- <input type="range" id="ses" max=100 min=0 value=10> -->
           </div>
         </div>
-        
+
       </div>
     </div>
-<script src="script.js"></script>
+
+    <script src="script.js"></script>
+
+    <!-- 👇 Thêm đoạn xử lý phát nhạc khi nhấn vào Messenger -->
+    <script>
+      document.getElementById('messenger').addEventListener('click', function () {
+        const audio = document.getElementById('sarki');
+        audio.play().catch(e => {
+          console.warn('Trình duyệt chưa cho phép phát nhạc:', e);
+        });
+      });
+    </script>
   </body>
 </html>
