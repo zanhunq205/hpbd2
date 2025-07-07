@@ -41,7 +41,7 @@
 
         <!-- Messenger notification -->
         <div class="notification">
-          <a href="index.html" target="_blank">
+          <a href="thiep.html" target="_blank">
             <div>
               <img class="img" src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" width="14" />
               <b>Messenger</b>
@@ -119,40 +119,6 @@
           });
         }
       }, 3000);
-    </script>
-<audio id="msg-sound" src="messenger.mp3" preload="auto"></audio>
-
-<script>
-  // Cờ đánh dấu đã phát âm thanh chưa
-  let msgPlayed = false;
-
-  function playMessengerSound() {
-    const sound = document.getElementById("msg-sound");
-    if (!msgPlayed) {
-      sound.play().then(() => {
-        msgPlayed = true;
-      }).catch(e => {
-        console.log("Chờ tương tác người dùng trước khi phát:", e);
-      });
-    }
-  }
-
-  // Chờ 3 giây rồi thử phát
-  setTimeout(() => {
-    // Nếu không bị chặn → phát luôn
-    playMessengerSound();
-
-    // Nếu bị chặn → gán sự kiện click để phát sau
-    window.addEventListener("click", playMessengerSound, { once: true });
-
-    // Hiện notification
-    const noti = document.querySelector(".notification");
-    if (noti) {
-      noti.style.visibility = "visible";
-      noti.style.opacity = "1";
-      noti.style.bottom = "100px";
-    }
-  }, 3000);
-</script>  
+    </script>  
 </body>
 </html>
