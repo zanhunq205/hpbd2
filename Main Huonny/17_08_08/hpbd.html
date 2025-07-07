@@ -6,66 +6,84 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: radial-gradient(circle, #ffdee9, #ffe1c9);
+      background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
       font-family: 'Segoe UI', sans-serif;
-      color: #fff;
-      text-align: center;
-      overflow: hidden;
+      color: #333;
+      overflow-x: hidden;
       position: relative;
     }
-    h1 {
-      font-size: 42px;
-      margin-top: 70px;
-      animation: fadeIn 2s ease-in-out forwards;
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 60px 40px;
+      flex-wrap: wrap;
     }
-    p {
-      font-size: 20px;
-      margin: 10px auto;
-      max-width: 600px;
-      opacity: 0;
-      animation: fadeIn 1.5s ease forwards;
-    }
-    p:nth-of-type(2) { animation-delay: 1.5s; }
-    p:nth-of-type(3) { animation-delay: 3s; }
-    p:nth-of-type(4) { animation-delay: 4.5s; }
-    p:nth-of-type(5) { animation-delay: 6s; }
     .avatar {
-      width: 180px;
+      width: 250px;
       border-radius: 20px;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-      margin: 20px auto;
-      display: block;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
       animation: zoomIn 2s ease-in-out;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    .messages {
+      max-width: 600px;
+      text-align: left;
+    }
+    .messages p {
+      font-size: 20px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      opacity: 0;
+    }
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
     @keyframes zoomIn {
       from { transform: scale(0.7); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: #fff;
-      animation: fall 5s linear infinite;
+    .gif-corner {
+      position: fixed;
+      width: 100px;
+      z-index: 5;
     }
-    @keyframes fall {
-      0% { transform: translateY(-100px) rotate(0); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    .top-left { top: 10px; left: 10px; }
+    .top-right { top: 10px; right: 10px; }
+    .bottom-left { bottom: 10px; left: 10px; }
+    .bottom-right { bottom: 10px; right: 10px; }
+    .above-audio {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+    }
+    audio {
+      margin: 40px auto;
+      display: block;
+      position: relative;
+      z-index: 2;
     }
     .marquee {
       width: 100%;
       white-space: nowrap;
       overflow: hidden;
       position: fixed;
-      bottom: 20px;
-      font-size: 24px;
+      bottom: 10px;
+      font-size: 22px;
       font-weight: bold;
-      color: #ff4081;
-      animation: glow 1.5s ease-in-out infinite alternate;
+      color: #c0392b;
+      background: rgba(255, 255, 255, 0.4);
+      padding: 5px 0;
+      text-shadow: 0 0 5px #fff;
     }
     .marquee span {
       display: inline-block;
@@ -73,49 +91,73 @@
       animation: marquee 20s linear infinite;
     }
     @keyframes marquee {
-      0% { transform: translateX(0%); }
+      0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #fff; }
-      to { text-shadow: 0 0 25px #ff4081; }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      animation: fall 5s linear infinite;
+      z-index: 1;
     }
-    audio {
-      margin-top: 20px;
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
     canvas {
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -1;
+      z-index: 0;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
 
+  <!-- Canvas pháo hoa -->
   <canvas id="fireworks"></canvas>
 
-  <img src="mai-huong.jpg" alt="Mai Hương" class="avatar" />
+  <!-- GIF các góc -->
+  <img src="https://media.giphy.com/media/QvBoMEcQ7DQXK/giphy.gif" class="gif-corner top-left" alt="gấu ôm tim">
+  <img src="https://media.giphy.com/media/3o6ZsV0vph1yWjc6vS/giphy.gif" class="gif-corner top-right" alt="sinh nhật">
+  <img src="https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.gif" class="gif-corner bottom-left" alt="bánh sinh nhật">
+  <img src="https://media.giphy.com/media/YTbZzCkRQCEJa/giphy.gif" class="gif-corner bottom-right" alt="hoa bay">
 
-  <h1>🎂 Chúc mừng sinh nhật Mai Hương! 🎉</h1>
-
-  <p>Chúc bạn tuổi mới thật nhiều sức khỏe, niềm vui và những điều tốt đẹp nhất! 🌸</p>
-  <p>Cảm ơn vì đã luôn lan tỏa sự ấm áp và nụ cười tươi sáng đến mọi người. 😊</p>
-  <p>Chúc bạn mãi luôn tự tin, thành công và được yêu thương đúng nghĩa. ✨</p>
-  <p>Hy vọng những điều bạn ước hôm nay sẽ trở thành sự thật trong năm nay. 💖</p>
-  <p>Một năm mới với nhiều kỷ niệm đẹp, nụ cười rạng rỡ và trái tim đầy hy vọng! 🌺</p>
-
-  <audio autoplay loop controls>
-    <source src="happy.mp3" type="audio/mp3" />
-    Trình duyệt không hỗ trợ phát nhạc.
-  </audio>
-
-  <div class="marquee">
-    <span>🎉 Chúc mừng sinh nhật Đinh Thị Mai Hương 🎂 Chúc bạn tuổi mới thật nhiều niềm vui và hạnh phúc! 💖🎈</span>
+  <!-- Ảnh + lời chúc -->
+  <div class="container">
+    <img src="maihuong.jpg" alt="Mai Hương" class="avatar" />
+    <div class="messages">
+      <p>Gửi đến Mai Hương – embeiu của anh,</p>
+      <p>Hôm nay là ngày đặc biệt mà vũ trụ gửi em đến thế giới này – để mang theo nụ cười, sự dịu dàng và ấm áp làm tan chảy tim anh mỗi ngày.</p>
+      <p>Anh biết có lẽ lời nói sẽ chẳng bao giờ đủ để diễn tả tình cảm trong lòng – nhưng hôm nay, anh muốn em cảm nhận tất cả qua từng lời, từng nhịp nhạc này.</p>
+      <p>Em luôn là người khiến thế giới của anh trở nên đáng sống, những khoảnh khắc bên em là món quà quý giá mà anh luôn trân trọng.</p>
+      <p>Chúc em tuổi mới rạng rỡ như ánh ban mai, luôn khỏe mạnh, luôn là chính em – cô gái vừa mạnh mẽ, vừa đáng yêu đến không ngờ.</p>
+      <p>Một năm thật nhiều yêu thương, niềm vui và những điều kỳ diệu sẽ đến với em. Happy Birthday, Mai Hương của anh! 🎂💖</p>
+    </div>
   </div>
 
+  <!-- Nhạc + GIF trên thanh nhạc -->
+  <div style="position: relative;">
+    <img src="https://media.giphy.com/media/MWSRkVoNaC30A/giphy.gif" class="above-audio" alt="love gif" />
+    <audio id="music" autoplay loop controls>
+      <source src="happy.mp3" type="audio/mp3" />
+      Trình duyệt của bạn không hỗ trợ audio.
+    </audio>
+  </div>
+
+  <!-- Dòng chữ chạy -->
+  <div class="marquee">
+    <span>🎉 Chúc mừng sinh nhật Mai Hương – Embeiu của anh 💖 Mong em luôn rạng rỡ, hạnh phúc và được yêu thương trọn vẹn nhất! 🎂✨</span>
+  </div>
+
+  <!-- JS: confetti + fireworks + text timing -->
   <script>
+    // Confetti
     for (let i = 0; i < 80; i++) {
       let c = document.createElement('div');
       c.className = 'confetti';
@@ -126,6 +168,7 @@
       document.body.appendChild(c);
     }
 
+    // Fireworks
     const canvas = document.getElementById('fireworks');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -167,6 +210,24 @@
 
     setInterval(createFirework, 1200);
     setInterval(drawFireworks, 33);
+
+    // Chữ chạy theo nhạc
+    const audio = document.getElementById("music");
+    const paragraphs = document.querySelectorAll(".messages p");
+
+    paragraphs.forEach(p => p.style.opacity = 0);
+
+    audio.addEventListener("timeupdate", () => {
+      const duration = audio.duration || 70;
+      const timePerParagraph = duration / paragraphs.length;
+      const currentTime = audio.currentTime;
+
+      paragraphs.forEach((p, index) => {
+        if (currentTime >= index * timePerParagraph && !p.style.animation) {
+          p.style.animation = "slideInLeft 1.2s ease forwards";
+        }
+      });
+    });
   </script>
 
 </body>
