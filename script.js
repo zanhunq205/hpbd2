@@ -1,3 +1,4 @@
+
 function dateArea(){
     var dateDay = new Date().getDate();
     var d = new Date();

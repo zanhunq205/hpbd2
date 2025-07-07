@@ -42,10 +42,10 @@
         </div>
 
         <div class="notification">
-          <a href="hpbd.html" target="_blank">
+          <a href="index.html" target="_blank">
           <div><img class="img" src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" width="14" />
             <b>Messenger</b></div>
-          <div class="notification-text">1 thông báo</div></a>
+          <div class="notification-text">1 thông báo tới Main Huonny</div></a>
         </div>
         <div class="flash-and-camera">
         <a href="https://www.youtube.com/c/CodingMaker" target="_blank"><img src="https://raw.githubusercontent.com/zouraiz523/iphone-14-pro-max/main/Phone%2014%20Pro%20Max%20and%20Dynamic%20Island/img-L.png" width="20"/>
@@ -79,8 +79,8 @@
             <p>Loreena Mckennitt Snow</p>
             <p class="c-gray">To Drive the Cold Winter Away</p>
     
-            <audio id="sarki" loop controls 
-            src="https://www.scriptgenerator.net/generator/really-simple-embed-audio-player-script_files/Loreena_Mckennitt_Snow_56bit.mp3"></audio>
+            <audio id="sarki" loop controls preload="auto"
+            src="happy.mp3"></audio>
     
             <div class="player">
                 <i class="bi bi-skip-backward-fill"></i>
@@ -98,5 +98,29 @@
       </div>
     </div>
 <script src="script.js"></script>
+
+<!-- Âm thanh Messenger -->
+<audio id="msg-sound" src="messenger.mp3" preload="auto"></audio>
+
+<script>
+  // Khi trang mở, sau 3 giây thì hiện thông báo Messenger + phát âm thanh
+  setTimeout(() => {
+    // Hiện thông báo bằng cách thêm lớp animation bằng tay
+    const noti = document.querySelector(".notification");
+    if (noti) {
+      noti.style.visibility = "visible";
+      noti.style.opacity = "1";
+      noti.style.bottom = "100px";
+    }
+
+    // Phát âm thanh Messenger
+    const sound = document.getElementById("msg-sound");
+    if (sound) {
+      sound.play().catch(() => {
+        console.log("Autoplay bị chặn. Cần tương tác trước khi phát âm.");
+      });
+    }
+  }, 3000);
+</script>
   </body>
 </html>

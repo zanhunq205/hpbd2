@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding: 0;
@@ -156,7 +157,7 @@
     background-color: rgba(255, 255, 255, 0.250);
     transition: all .5s;
     animation: notification .5s forwards;
-    animation-delay: 5s;
+    animation-delay: 3s;
     color: white;
   
   }

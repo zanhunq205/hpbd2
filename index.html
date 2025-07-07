@@ -34,17 +34,7 @@
       font-size: 20px;
       line-height: 1.6;
       margin-bottom: 20px;
-      opacity: 0;
-    }
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-60px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      white-space: pre-line;
     }
     @keyframes zoomIn {
       from { transform: scale(0.7); opacity: 0; }
@@ -132,16 +122,16 @@
   <div class="container">
     <img src="maihuong.jpg" alt="Mai Hương" class="avatar" />
     <div class="messages">
-      <p>Gửi đến Mai Hương – embeiu của anh,</p>
-      <p>Hôm nay là ngày đặc biệt mà vũ trụ gửi em đến thế giới này – để mang theo nụ cười, sự dịu dàng và ấm áp làm tan chảy tim anh mỗi ngày.</p>
-      <p>Anh biết có lẽ lời nói sẽ chẳng bao giờ đủ để diễn tả tình cảm trong lòng – nhưng hôm nay, anh muốn em cảm nhận tất cả qua từng lời, từng nhịp nhạc này.</p>
-      <p>Em luôn là người khiến thế giới của anh trở nên đáng sống, những khoảnh khắc bên em là món quà quý giá mà anh luôn trân trọng.</p>
-      <p>Chúc em tuổi mới rạng rỡ như ánh ban mai, luôn khỏe mạnh, luôn là chính em – cô gái vừa mạnh mẽ, vừa đáng yêu đến không ngờ.</p>
-      <p>Một năm thật nhiều yêu thương, niềm vui và những điều kỳ diệu sẽ đến với em. Happy Birthday, Mai Hương của anh! 🎂💖</p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
     </div>
   </div>
 
-  <!-- Nhạc + GIF trên thanh nhạc -->
+  <!-- Nhạc + GIF -->
   <div style="position: relative;">
     <img src="https://media.giphy.com/media/MWSRkVoNaC30A/giphy.gif" class="above-audio" alt="love gif" />
     <audio id="music" autoplay loop controls>
@@ -155,7 +145,7 @@
     <span>🎉 Chúc mừng sinh nhật Mai Hương – Embeiu của anh 💖 Mong em luôn rạng rỡ, hạnh phúc và được yêu thương trọn vẹn nhất! 🎂✨</span>
   </div>
 
-  <!-- JS: confetti + fireworks + text timing -->
+  <!-- Script -->
   <script>
     // Confetti
     for (let i = 0; i < 80; i++) {
@@ -211,22 +201,51 @@
     setInterval(createFirework, 1200);
     setInterval(drawFireworks, 33);
 
-    // Chữ chạy theo nhạc
+    // Lời chúc từng chữ theo nhạc
     const audio = document.getElementById("music");
     const paragraphs = document.querySelectorAll(".messages p");
 
-    paragraphs.forEach(p => p.style.opacity = 0);
+    const contents = [
+      "Gửi đến Mai Hương – embeiu của anh,",
+      "Hôm nay là ngày đặc biệt mà vũ trụ gửi em đến thế giới này – để mang theo nụ cười, sự dịu dàng và ấm áp làm tan chảy tim anh mỗi ngày.",
+      "Anh biết có lẽ lời nói sẽ chẳng bao giờ đủ để diễn tả tình cảm trong lòng – nhưng hôm nay, anh muốn em cảm nhận tất cả qua từng lời, từng nhịp nhạc này.",
+      "Em luôn là người khiến thế giới của anh trở nên đáng sống, những khoảnh khắc bên em là món quà quý giá mà anh luôn trân trọng.",
+      "Chúc em tuổi mới rạng rỡ như ánh ban mai, luôn khỏe mạnh, luôn là chính em – cô gái vừa mạnh mẽ, vừa đáng yêu đến không ngờ.",
+      "Một năm thật nhiều yêu thương, niềm vui và những điều kỳ diệu sẽ đến với em. Happy Birthday, Mai Hương của anh! 🎂💖"
+    ];
 
-    audio.addEventListener("timeupdate", () => {
-      const duration = audio.duration || 70;
-      const timePerParagraph = duration / paragraphs.length;
-      const currentTime = audio.currentTime;
+    paragraphs.forEach(p => p.innerHTML = "");
 
-      paragraphs.forEach((p, index) => {
-        if (currentTime >= index * timePerParagraph && !p.style.animation) {
-          p.style.animation = "slideInLeft 1.2s ease forwards";
+    function typeText(element, text, delay, callback) {
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          element.innerHTML += text[i];
+          i++;
+          setTimeout(type, delay);
+        } else if (callback) {
+          callback();
         }
-      });
+      }
+      type();
+    }
+
+    audio.addEventListener("play", () => {
+      const duration = audio.duration || 70;
+      const timePerParagraph = duration / contents.length;
+      let current = 0;
+
+      function showNext() {
+        if (current < contents.length) {
+          const p = paragraphs[current];
+          typeText(p, contents[current], 40, () => {
+            setTimeout(showNext, 500);
+          });
+          current++;
+        }
+      }
+
+      showNext();
     });
   </script>
 
