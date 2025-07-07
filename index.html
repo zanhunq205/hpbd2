@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -33,24 +33,23 @@
         <div class="widget-area">
           <a href="https://www.youtube.com/c/CodingMaker" target="_blank">
             <span class="widget"><i class="bi bi-cloud-moon-fill"></i> 21°</span>
-            <span class="widget bell"><i class="bi bi-bell-fill sound"></i></a>
-            <i class="bi bi-bell-slash-fill quiet"></i></span>
+            <span class="widget bell"><i class="bi bi-bell-fill sound"></i></span>
+            <span class="widget"><i class="bi bi-bell-slash-fill quiet"></i></span>
             <span class="widget"><i class="bi bi-spotify spotify"></i></span>
             <span class="widget"><i class="bi bi-fuel-pump-fill fuelWidgetIcon"></i></span>
+          </a>
         </div>
 
         <!-- Messenger notification -->
-        <div class="notification">
-          <a href="thiep.html" target="_blank">
-  <div class="notification" style="visibility: hidden; opacity: 0;">
-    <div>
-      <img class="img" src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" width="14" />
-      <b>Messenger</b>
-    </div>
-    <div class="notification-text">Thông báo tới embe Mai Hương 💌</div>
-  </div>
-</a>
-        </div>
+        <a href="thiep.html" target="_blank">
+          <div class="notification" style="visibility: hidden; opacity: 0;">
+            <div>
+              <img class="img" src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" width="14" />
+              <b>Messenger</b>
+            </div>
+            <div class="notification-text">Người Đẹp Dậy Rep Tin Nhắn Anh VanHungw Đi Ạ 💌</div>
+          </div>
+        </a>
 
         <div class="flash-and-camera">
           <a href="https://www.youtube.com/c/CodingMaker" target="_blank">
@@ -71,8 +70,8 @@
           <img src="https://raw.githubusercontent.com/zouraiz523/iphone-14-pro-max/main/Phone%2014%20Pro%20Max%20and%20Dynamic%20Island/img-map.jpg" alt="Maps">
           <div class="fuel-ntf-app">
             <span><b>Aim:</b> Petrol Ofisi</span><br>
-            <span><b>remaining time:</b> 15 min</span><br>
-            <span><b>mode of transportation:</b> Car</span>
+            <span><b>Remaining time:</b> 15 min</span><br>
+            <span><b>Mode of transportation:</b> Car</span>
           </div>
         </div>
 
@@ -81,7 +80,7 @@
             <img src="https://raw.githubusercontent.com/zouraiz523/iphone-14-pro-max/main/Phone%2014%20Pro%20Max%20and%20Dynamic%20Island/img-M.jpg" alt="Music" class="music-poster">
           </div>
           <div class="music-details">
-            <p>Loreena Mckennitt Snow</p>
+            <p>Loreena McKennitt - Snow</p>
             <p class="c-gray">To Drive the Cold Winter Away</p>
             <audio id="sarki" loop controls preload="auto" src="happy.mp3"></audio>
             <div class="player">
@@ -101,12 +100,11 @@
     <!-- Âm thanh Messenger -->
     <audio id="msg-sound" src="messenger.mp3" preload="auto"></audio>
 
-    <!-- Script xử lý hiệu ứng -->
-    <script src="script.js"></script>
-
+    <!-- Script xử lý hiện Messenger và phát "ting" -->
     <script>
-      // Sau 3 giây: hiện thông báo và phát âm thanh "ting"
-      setTimeout(() => {
+      let msgPlayed = false;
+
+      function showNotificationAndPlay() {
         const noti = document.querySelector(".notification");
         if (noti) {
           noti.style.visibility = "visible";
@@ -115,12 +113,19 @@
         }
 
         const sound = document.getElementById("msg-sound");
-        if (sound) {
-          sound.play().catch(() => {
-            console.log("Autoplay bị chặn. Cần tương tác trước.");
+        if (!msgPlayed && sound) {
+          sound.play().then(() => {
+            msgPlayed = true;
+          }).catch(e => {
+            console.warn("Trình duyệt chặn autoplay:", e);
           });
         }
-      }, 3000);
-    </script>  
-</body>
+      }
+
+      // Sau khi user click bất kỳ đâu, chờ 3 giây rồi hiện Messenger
+      window.addEventListener("click", () => {
+        setTimeout(showNotificationAndPlay, 3000);
+      }, { once: true });
+    </script>
+  </body>
 </html>
