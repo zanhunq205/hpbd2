@@ -32,14 +32,35 @@
 
         <div class="clock-area"></div>
         <div class="widget-area">
-          <a href="https://www.youtube.com/c/CodingMaker" target="_blank">
-            <span class="widget"><i class="bi bi-cloud-moon-fill"></i> 21°</span>
-            <span class="widget bell"><i class="bi bi-bell-fill sound"></i></span>
-            <span class="widget"><i class="bi bi-bell-slash-fill quiet"></i></span>
-            <span class="widget"><i class="bi bi-spotify spotify"></i></span>
-            <span class="widget"><i class="bi bi-fuel-pump-fill fuelWidgetIcon"></i></span>
-          </a>
+  <!-- ✅ Thay thế toàn bộ phần widget-area cũ bằng đoạn dưới đây -->
+<div class="widget-area">
+  <!-- Thời tiết -->
+  <a href="https://www.google.com/search?q=weather+Hanoi" class="widget weather" target="_blank">
+    <i class="bi bi-cloud-moon-fill"></i> 20°
+  </a>
+
+  <!-- Chuông - Dẫn tới trang thiệp hoặc tự chọn -->
+  <a href="thiep.html" class="widget bell" target="_blank">
+    <i class="bi bi-bell-fill sound"></i>
+  </a>
+
+  <!-- Chuông tắt - dùng cho trang trí hoặc JS sau này -->
+  <a href="#" class="widget quiet">
+    <i class="bi bi-bell-slash-fill"></i>
+  </a>
+
+  <!-- Spotify -->
+  <a href="https://open.spotify.com/" class="widget spotify" target="_blank">
+    <i class="bi bi-spotify"></i>
+  </a>
+
+  <!-- Xăng / Bản đồ -->
+  <a href="https://www.google.com/maps/search/petrol+station+near+me" class="widget fuel" target="_blank">
+    <i class="bi bi-fuel-pump-fill fuelWidgetIcon"></i>
+  </a>
+</div>
         </div>
+
 
         <!-- Messenger notification -->
         <a href="thiep.html" target="_blank">
@@ -48,7 +69,7 @@
               <img class="img" src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" width="14" />
               <b>Messenger</b>
             </div>
-            <div class="notification-text">Người Đẹp Dậy Rep Tin Nhắn Anh VanHungw Đi Ạ 💌</div>
+            <div class="notification-text">Người Đẹp Dậy Rep Tin Nhắn Đi Ạ 💌</div>
           </div>
         </a>
 

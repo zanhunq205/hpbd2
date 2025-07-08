@@ -476,3 +476,40 @@
       color: red; opacity: .8;
     }
   }
+.widget.weather:hover i {
+  color: #4aa8f0;
+}
+
+.widget.spotify:hover i {
+  color: #1ED760;
+}
+
+.widget.fuel:hover i {
+  color: orange;
+}
+
+.widget.bell:hover i {
+  color: red;
+}
+
+.widget.quiet:hover i {
+  opacity: 0.5;
+}
+<!-- ✅ Thêm CSS vào cuối file style.css hoặc trong <style> -->
+<style>
+  .widget.weather:hover i {
+    color: #4aa8f0;
+  }
+  .widget.spotify:hover i {
+    color: #1ED760;
+  }
+  .widget.fuel:hover i {
+    color: orange;
+  }
+  .widget.bell:hover i {
+    color: red;
+  }
+  .widget.quiet:hover i {
+    opacity: 0.5;
+  }
+</style>
